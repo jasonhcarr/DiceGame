@@ -1,7 +1,7 @@
 var diceGame = {
     regions: {
         resultMessage: null,
-        lastWinMeassage: null,
+        lastWinMessage: null,
         leftDie: null,
         rightDie: null,
         rollDiceBtn: null,
@@ -15,11 +15,14 @@ var diceGame = {
         this.regions.rightDie = document.getElementById('right-die');
         this.regions.rollDiceBtn = document.getElementById('roll-dice');
         this.regions.startMessage = document.getElementById('game-started');
-        this.regions.rollDiceBtn = document.addEventListener('click', this.diceRoll.bind(this));
+        this.regions.rollDiceBtn = document.getElementById('roll-dice').addEventListener('click', this.diceRoll.bind(this));
+        this.printStartTime();
     },
 
     values: {
-        turns: [],
+        currentTime: null,
+        timeSinceWin: null,
+        turnsSinceWin: null,
         leftDie: null,
         rightDie: null,
         diceTotal: null
@@ -42,16 +45,59 @@ var diceGame = {
     diceRollTotal: function() {
       var diceTotal = this.values.leftDie + this.values.rightDie;
       this.values.diceTotal = diceTotal;
-      console.log(diceTotal);
+      this.message(diceTotal);
+    },
+
+    getTimeInfo: function () {
+      var currentTime = new Date();
+      this.values.currentTime = currentTime;
+      console.log(this.values.currentTime);
+    },
+
+    printStartTime: function() {
+      this.getTimeInfo();
+      var time = this.values.currentTime;
+      var year = time.getFullYear(),
+          mo = time.getMonth(),
+          day = time.getDate();
+          hour = time.getHours();
+          min = (time.getMinutes()<10?'0':'') + time.getMinutes();
+      this.regions.startMessage.innerHTML = "Game Started " + year + "-" + mo + "-" + day + " at " + hour + ":" + min;
+    },
+
+    getTimeSince: function() {
+      var startTime = this.values.currentTime;
+      this.getTimeInfo();
+      var winTime = this.values.currentTime;
+      var timeSinceWin = Math.ceil((winTime - startTime)/1000);
+      this.values.timeSinceWin = timeSinceWin;
+    },
+
+    getTurnsSince: function() {
+      var turnsSinceWin = parseInt(this.values.turnsSinceWin) + 1;
+      if (isNaN(turnsSinceWin)) {
+        turnsSinceWin = 1;
+      } else {
+        turnsSinceWin = turnsSinceWin;
+      }
+      this.values.turnsSinceWin = turnsSinceWin;
+    },
+
+    message: function(diceTotal) {
+      if (diceTotal === 7 || diceTotal === 11) {
+        this.getTurnsSince();
+        var turnsSinceWin = this.values.turnsSinceWin;
+        this.getTimeSince();
+        var timeSinceWin = this.values.timeSinceWin;
+        this.regions.lastWinMessage.innerHTML = "It took you " + turnsSinceWin + " tries and " + timeSinceWin + " seconds";
+        this.regions.resultMessage.innerHTML = "Winner!";
+        this.values.turnsSinceWin = null;
+      } else {
+        this.regions.lastWinMessage.innerHTML = " ";
+        this.regions.resultMessage.innerHTML = "Try Again";
+        this.values.turnsSinceWin ++;
+      }
     }
-    // message: function() {
-    //   var dieTotal = parsInt(this.values.leftDie, 10) + parsInt(this.values.rightDie, 10);
-    //   if (dieTotal === 7 || 11) {
-    //     this.regions.resultMessage.innerHTML = "Winner!";
-    //   } else {
-    //     this.regions.resultMessage.innerHTML = "Try Again";
-    //   }
-    // }
 };
 
 diceGame.init();
