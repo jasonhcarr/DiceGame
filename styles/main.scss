@@ -9,34 +9,58 @@
   position: absolute;
   transform: translate(-50%, -50%);
   font-family: sans-serif;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.small-text {
-  font-size: .8em;
-}
-.message-container  {
-  // width: 75%;
-  margin: 15px 0 5px 0;
-}
+  .small-text {
+    font-size: .8em;
+  }
 
-#message {
-  margin: 0 auto;
-  width: 100%;
-}
+  .message-container  {
+    // width: 75%;
+    margin: 10px 0 5px 0;
 
-#last-win-message {
-  margin: 0 auto;
-  width: 100%;
-}
+    #message {
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
 
-.dice-container {
-  position: relative;
-}
+    #last-win-message {
+      margin: 3px 0 8px 0;
+      width: 100%;
+      height: 16px;
+    }
+  }
 
-.dice {
-  height: 55px;
-  width: 55px;
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 3px;
+  .dice-container {
+    position: relative;
+
+    .dice {
+      background-color: #ddd;
+      height: 55px;
+      width: 55px;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 3px;
+      text-align: center;
+      line-height: 55px;
+    }
+
+    #left-die {
+      margin-right: 40px;
+    }
+  }
+
+  #roll-dice {
+    background-color: #444;
+    color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 10px 0 15px;
+  }
 }

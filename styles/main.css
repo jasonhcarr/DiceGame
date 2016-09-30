@@ -8,30 +8,43 @@
   float: left;
   position: absolute;
   transform: translate(-50%, -50%);
-  font-family: sans-serif; }
-
-.small-text {
-  font-size: .8em; }
-
-.message-container {
-  margin: 15px 0 5px 0; }
-
-#message {
-  margin: 0 auto;
-  width: 100%; }
-
-#last-win-message {
-  margin: 0 auto;
-  width: 100%; }
-
-.dice-container {
-  position: relative; }
-
-.dice {
-  height: 55px;
-  width: 55px;
-  display: inline-block;
-  border: 1px solid black;
-  border-radius: 3px; }
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .game-container .small-text {
+    font-size: .8em; }
+  .game-container .message-container {
+    margin: 10px 0 5px 0; }
+    .game-container .message-container #message {
+      margin: 0 auto;
+      width: 100%;
+      text-align: center; }
+    .game-container .message-container #last-win-message {
+      margin: 3px 0 8px 0;
+      width: 100%;
+      height: 16px; }
+  .game-container .dice-container {
+    position: relative; }
+    .game-container .dice-container .dice {
+      background-color: #ddd;
+      height: 55px;
+      width: 55px;
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 3px;
+      text-align: center;
+      line-height: 55px; }
+    .game-container .dice-container #left-die {
+      margin-right: 40px; }
+  .game-container #roll-dice {
+    background-color: #444;
+    color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 10px 0 15px; }
 
 /*# sourceMappingURL=main.css.map */
